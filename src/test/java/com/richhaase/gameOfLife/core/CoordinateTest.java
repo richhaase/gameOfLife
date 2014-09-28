@@ -58,7 +58,7 @@ public class CoordinateTest {
   public void testEquality() throws Exception {
     assertEquals(coordinate, coordinate);
     assertEquals(new Coordinate(3, 5), coordinate);
-    assertNotEquals(new Cell(coordinate), coordinate);
+    assertNotEquals(new Cell(coordinate, false), coordinate);
   }
 
   @Test

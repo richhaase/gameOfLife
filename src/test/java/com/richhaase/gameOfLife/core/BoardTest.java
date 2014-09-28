@@ -55,11 +55,8 @@ public class BoardTest {
 
   @Test
   public void testNextGeneration() {
-    System.out.println(definedBoard);
-    System.out.println(BoardUtils.fiveByfiveChevronsSecondGen());
-    System.out.println(definedBoard.nextGeneration());
-    assertEquals(BoardUtils.fiveByfiveChevronsSecondGen(), definedBoard.nextGeneration());
     assertNotEquals(new Board(5, 5), definedBoard.nextGeneration());
+    assertEquals(BoardUtils.fiveByfiveChevronsSecondGen(), definedBoard.nextGeneration());
   }
 
 }

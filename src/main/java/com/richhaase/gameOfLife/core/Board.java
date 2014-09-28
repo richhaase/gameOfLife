@@ -33,7 +33,7 @@ public class Board {
     for (int x = 0; x < height; x++) {
       for (int y = 0; y < width; y++) {
         Coordinate coordinate = new Coordinate(x, y);
-        Cell cell = new Cell(coordinate);
+        Cell cell = new Cell(coordinate, false);
         if (random.nextBoolean()) { cell.spawn(); } else { cell.kill(); }
         cellMapping.put(coordinate, cell);
       }
@@ -62,7 +62,7 @@ public class Board {
       for (int y = 0; y < width; y++) {
         Coordinate coordinate = new Coordinate(x, y);
         if (! cellMapping.containsKey(coordinate)) {
-          Cell cell = new Cell(coordinate);
+          Cell cell = new Cell(coordinate, false);
           cell.kill();
           cellMapping.put(coordinate, cell);
         }
@@ -83,20 +83,24 @@ public class Board {
 
       if (cell.isAlive()) {
         if (liveNeighbors < MIN_NEIGHBORS) {
-          cell.kill();    //under-population kill
+          // under population cell dies
+          cells.add(new Cell(cell.getCoordinate(), false));
         } else if (liveNeighbors > MAX_NEIGHBORS) {
-          cell.kill();    //over-population kill
+          // over populated region of the board cell dies
+          cells.add(new Cell(cell.getCoordinate(), false));
         } else {
-          cell.spawn();   //survive
+          // optimal population level! cell survives
+          cells.add(new Cell(cell.getCoordinate(), true));
         }
       } else {
         if (liveNeighbors == OPTIMAL_NEIGHBORS) {
-          cell.spawn();   //spawn new cell
+          // optimal population level! spawn a new cell
+          cells.add(new Cell(cell.getCoordinate(), true));
         } else {
-          cell.kill();    //
+          // cell is not spawned
+          cells.add(new Cell(cell.getCoordinate(), false));
         }
       }
-      cells.add(cell);
     }
 
     return new Board(height, width, cells);
@@ -120,9 +124,11 @@ public class Board {
   }
 
   /**
-   * A predicate method used to determine whether a
-   * @param coordinate
-   * @return
+   * A predicate method used to determine whether a coordinate
+   * is valid for this instance of the <code>Board</code>
+   *
+   * @param coordinate  the <code>Coordinate</code> to be killed
+   * @return true or false
    */
   boolean isValidBoardPosition(Coordinate coordinate) {
     int x = coordinate.getX();
@@ -163,16 +169,21 @@ public class Board {
   private String asciiHeader() {
     String corner = "*";
     StringBuilder sb = new StringBuilder();
+
     sb.append(corner);
-    for (int n = 0; n < width; n++) { sb.append("---"); }
-    sb.append(corner + "\n");
+    for (int n = 0; n < width; n++) {
+      sb.append("---");
+    }
+    sb.append(corner).append("\n");
+
     return sb.toString();
   }
 
   @Override
   public String toString() {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     sb.append(asciiHeader());
+
     for (int n = 0; n < height; n++) {
       sb.append("|");
       for (int m = 0; m < width; m++) {
@@ -192,11 +203,8 @@ public class Board {
     if (this == that) return true;
     if (! (that instanceof Board)) return false;
     Board thatBoard = (Board) that;
-    if (thatBoard.height == height &&
-        thatBoard.width == width  &&
-        thatBoard.cellMapping.equals(cellMapping)) {
-      return true;
-    }
-    return false;
+    return thatBoard.height == height &&
+        thatBoard.width == width &&
+        thatBoard.cellMapping.equals(cellMapping);
   }
 }

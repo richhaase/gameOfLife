@@ -48,7 +48,7 @@ public class CellTest {
   public void testEquality() throws Exception {
     assertEquals(cell, cell);
     assertNotEquals(cell, coordinate);
-    Cell equalCell = new Cell(coordinate);
+    Cell equalCell = new Cell(coordinate, false);
     equalCell.spawn();
     assertEquals(cell, equalCell);
   }

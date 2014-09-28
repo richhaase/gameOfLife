@@ -18,38 +18,19 @@ public class Cell {
    * @param alive a boolean value of alive or dead (t or f)
    */
   public Cell(Coordinate coordinate, boolean alive) {
-    this.coordinate = coordinate;
+    this.coordinate = new Coordinate(coordinate.getX(), coordinate.getY());
     this.alive = alive;
   }
 
   /**
    * Constructor
    *
-   * @param coordinate a <code>Coordinate</code> object
+   * @param x     <code>Coordinate</code> x axis
+   * @param y     <code>Coordinate</code> y axis
+   * @param alive a boolean value of alive or dead (t or f)
    */
-  public Cell(Coordinate coordinate) {
-    this(coordinate, false);
-  }
-
-  /**
-   *
-   * @param height
-   * @param width
-   * @param alive
-   */
-  public Cell(int height, int width, boolean alive) {
-    this.coordinate = new Coordinate(height, width);
-    this.alive = alive;
-  }
-
-  /**
-   * Constructor
-   *
-   * @param height cell coordinate height
-   * @param width  cell coordinate width
-   */
-  public Cell(int height, int width) {
-    this(new Coordinate(height, width), false);
+  public Cell(int x, int y, boolean alive) {
+    this(new Coordinate(x, y), alive);
   }
 
   /**
