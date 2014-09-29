@@ -5,7 +5,7 @@ import java.util.*;
 /**
 * Created by rdh on 9/26/14.
 */
-public class Board {
+public class Board implements Iterable<Cell> {
 
   private final int MIN_NEIGHBORS = 2;
   private final int MAX_NEIGHBORS = 3;
@@ -159,6 +159,13 @@ public class Board {
   }
 
   /**
+   *
+   */
+  public Iterator<Map.Entry<Coordinate, Cell>> get() {
+    return cellMapping.entrySet().iterator();
+  }
+
+  /**
    * generates an appropriately sized heading <code>String</code>,
    * like:
    *
@@ -180,6 +187,21 @@ public class Board {
   }
 
   @Override
+  public boolean equals(Object that) {
+    if (this == that) return true;
+    if (! (that instanceof Board)) return false;
+    Board thatBoard = (Board) that;
+    return thatBoard.height == height &&
+        thatBoard.width == width &&
+        thatBoard.cellMapping.equals(cellMapping);
+  }
+
+  @Override
+  public Iterator<Cell> iterator() {
+    return cellMapping.values().iterator();
+  }
+
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append(asciiHeader());
@@ -198,13 +220,4 @@ public class Board {
     return sb.toString();
   }
 
-  @Override
-  public boolean equals(Object that) {
-    if (this == that) return true;
-    if (! (that instanceof Board)) return false;
-    Board thatBoard = (Board) that;
-    return thatBoard.height == height &&
-        thatBoard.width == width &&
-        thatBoard.cellMapping.equals(cellMapping);
-  }
 }
