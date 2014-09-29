@@ -49,7 +49,6 @@ public class CellTest {
     assertEquals(cell, cell);
     assertNotEquals(cell, coordinate);
     Cell equalCell = new Cell(coordinate, false);
-    equalCell.spawn();
     assertEquals(cell, equalCell);
   }
 }

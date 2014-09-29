@@ -69,8 +69,7 @@ public class Cell {
   public boolean equals(Object that) {
     if (this == that) return true;
     if (! (that instanceof Cell)) return false;
-    Cell thatCell = (Cell) that;
-    return this.getCoordinate().equals(thatCell.getCoordinate()) && this.isAlive() == thatCell.isAlive();
+    return this.hashCode() == that.hashCode();
   }
 
   @Override

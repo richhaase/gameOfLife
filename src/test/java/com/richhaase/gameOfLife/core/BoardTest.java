@@ -18,7 +18,7 @@ public class BoardTest {
   }
 
   @Test
-  public void testToAscii() throws Exception {
+  public void testToString() throws Exception {
     String expected =
         "*---------------*\n" +
         "|       @       |\n" +
