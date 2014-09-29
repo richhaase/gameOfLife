@@ -1,6 +1,5 @@
 package com.richhaase.gameOfLife;
 
-import com.richhaase.gameOfLife.core.Board;
 import com.richhaase.gameOfLife.ui.GameApplet;
 
 /**
@@ -8,7 +7,6 @@ import com.richhaase.gameOfLife.ui.GameApplet;
 */
 public class GameRunner implements Runnable {
 
-  private Board board;
   private int height, width,redraw;
 
   public GameRunner(int height, int width, int redraw) {
