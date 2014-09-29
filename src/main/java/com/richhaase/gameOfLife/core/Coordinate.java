@@ -28,7 +28,7 @@ public class Coordinate {
    *
    * @return the x-axis of the coordinate
    */
-  int getX() {
+  public int getX() {
     return x;
   }
 
@@ -37,7 +37,7 @@ public class Coordinate {
    *
    * @return the y-axis of the coordinate
    */
-  int getY() {
+  public int getY() {
     return y;
   }
 
