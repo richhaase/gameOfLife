@@ -13,6 +13,7 @@ public class Board implements Iterable<Cell> {
 
   private final int height;
   private final int width;
+
   private Map<Coordinate, Cell> cellMapping = new HashMap<>();
 
   /**
@@ -68,6 +69,15 @@ public class Board implements Iterable<Cell> {
         }
       }
     }
+  }
+
+
+  public int getHeight() {
+    return height;
+  }
+
+  public int getWidth() {
+    return width;
   }
 
   /**
