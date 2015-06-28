@@ -1,6 +1,6 @@
 package com.richhaase.gameOfLife;
 
-import com.richhaase.gameOfLife.ui.GameApplet;
+import com.richhaase.gameOfLife.cli.GameText;
 
 /**
 * Created by rdh on 9/26/14.
@@ -16,7 +16,7 @@ public class GameRunner implements Runnable {
   }
 
   public void run() {
-    new GameApplet(height, width, redraw).run();
+    new GameText(height, width, redraw).run();
   }
 
   public static void main(String[] args) {
